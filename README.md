@@ -108,6 +108,7 @@ cd pastebin-lite
 pnpm install
 
 3️⃣ Generate Prisma client
+
 npx prisma generate
 
 4️⃣ Start the development server
