@@ -47,7 +47,8 @@
 //   maxViews: paste.maxViews,
 // });
 // }
-export const runtime = "edge";
+
+// export const runtime = "edge";
 
 import { NextResponse } from "next/server";
 import { prisma, getNow } from "@/lib/prisma";
