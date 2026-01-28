@@ -27,5 +27,10 @@ export async function POST(req: Request) {
     },
   });
 
-  return NextResponse.json({ id: paste.id });
+  const origin = req.headers.get("origin");
+
+  return NextResponse.json({
+    id: paste.id,
+    url: `${origin}/p/${paste.id}`,
+  });
 }

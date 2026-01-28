@@ -10,7 +10,7 @@ export default function Home() {
   const router = useRouter();
 
   async function createPaste() {
-    const res = await fetch("/api/paste", {
+    const res = await fetch("/api/pastes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -21,7 +21,9 @@ export default function Home() {
     });
 
     const data = await res.json();
-    router.push(`/paste/${data.id}`);
+
+    // ✅ Spec-compliant redirect
+    router.push(data.url);
   }
 
   return (
@@ -52,10 +54,7 @@ export default function Home() {
         onChange={(e) => setExpiresIn(e.target.value)}
       />
 
-      <button
-        onClick={createPaste}
-        style={{ marginTop: 12 }}
-      >
+      <button onClick={createPaste} style={{ marginTop: 12 }}>
         Create Paste
       </button>
     </main>
