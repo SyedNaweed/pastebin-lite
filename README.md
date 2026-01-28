@@ -150,7 +150,7 @@ Responses:
 
 # 👤 Author
 
-Syed Naweed
+Syed Naweed S N
 
 ```bash
 GitHub: https://github.com/SyedNaweed
