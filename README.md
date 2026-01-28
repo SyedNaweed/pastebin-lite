@@ -95,28 +95,35 @@ prisma/
 
 Create a `.env` file in the project root:
 
-```env
+```bash
 DATABASE_URL=postgresql://<your-neon-connection-string>
-🧪 Running Locally
-1️⃣ Clone the repository
+```
+
+# 🧪 Running Locally
+
+## 1. Clone the repository
 
 git clone https://github.com/SyedNaweed/pastebin-lite.git
 cd pastebin-lite
 
-2️⃣ Install dependencies
+## 2. Install dependencies
 
 pnpm install
 
-3️⃣ Generate Prisma client
+
+## 3. Generate Prisma client
 
 npx prisma generate
 
-4️⃣ Start the development server
+## 4. Start the development server
 
 pnpm dev
 
 The app will be available at:
+
+```bash
 http://localhost:3000
+```
 
 🔗 API Endpoints
 Create a paste
@@ -124,11 +131,14 @@ POST /api/pastes
 
 Request Body:
 
+```bash
 {
   "content": "Hello world",
   "expiresIn": 60,
   "maxViews": 3
 }
+```
+
 Get a paste
 GET /api/pastes/:id
 
@@ -138,9 +148,11 @@ Responses:
 
 404 → Paste expired, view limit reached, or not found
 
-👤 Author
+# 👤 Author
 
 Syed Naweed
+
+```bash
 GitHub: https://github.com/SyedNaweed
 
 ```
