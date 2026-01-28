@@ -1,66 +1,63 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const [content, setContent] = useState("");
+  const [maxViews, setMaxViews] = useState("");
+  const [expiresIn, setExpiresIn] = useState("");
+  const router = useRouter();
+
+  async function createPaste() {
+    const res = await fetch("/api/paste", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        content,
+        maxViews: maxViews ? Number(maxViews) : undefined,
+        expiresIn: expiresIn ? Number(expiresIn) : undefined,
+      }),
+    });
+
+    const data = await res.json();
+    router.push(`/paste/${data.id}`);
+  }
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main style={{ padding: 24, maxWidth: 800 }}>
+      <h1>Pastebin Lite</h1>
+
+      <textarea
+        rows={10}
+        style={{ width: "100%", marginTop: 12 }}
+        placeholder="Paste your text here..."
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
+
+      <input
+        type="number"
+        placeholder="Max views (optional)"
+        style={{ marginTop: 12, display: "block" }}
+        value={maxViews}
+        onChange={(e) => setMaxViews(e.target.value)}
+      />
+
+      <input
+        type="number"
+        placeholder="Expires in seconds (optional)"
+        style={{ marginTop: 12, display: "block" }}
+        value={expiresIn}
+        onChange={(e) => setExpiresIn(e.target.value)}
+      />
+
+      <button
+        onClick={createPaste}
+        style={{ marginTop: 12 }}
+      >
+        Create Paste
+      </button>
+    </main>
   );
 }
