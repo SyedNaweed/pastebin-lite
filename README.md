@@ -74,7 +74,7 @@ Live Demo:
 ---
 
 ## 📂 Project Structure
-
+```bash
 src/
 ├─ app/
 │ ├─ api/
@@ -88,7 +88,7 @@ src/
 └─ prisma.ts # Prisma client
 prisma/
 └─ schema.prisma
-
+```
 ---
 
 ## ⚙️ Environment Variables
